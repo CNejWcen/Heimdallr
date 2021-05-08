@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\Heimdallr.ewp</path>
+  </project>
+  <batchBuild>
+    <batchDefinition>
+      <name>all</name>
+      <member>
+        <project>KeyFobDemo</project>
+        <configuration>CC2541</configuration>
+      </member>
+    </batchDefinition>
+  </batchBuild>
+</workspace>
+
+
