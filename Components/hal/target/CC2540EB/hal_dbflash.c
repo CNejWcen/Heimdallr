@@ -9,11 +9,11 @@
 
 #include "hal_dbflash.h"
 
-bool isBusy();
 
-void DBReadArray(uint32 addr,uint8 *buffer,uint8 len)
+
+void DBRead(uint32 addr,uint8 *buffer,uint8 len)
 {
-	DBOpStart(which,addr);
+	DBOpStart(DB_ARRAY_READ_LP,addr);
 	for (int i = 0; i < len; ++i)
 	{
 		SPIRead(buffer[i],DUMMY);
@@ -276,7 +276,41 @@ void DBExitDeepPowerDown(void)
 	FLASH_CS = SPI_DISABLE;
 	WAIT_MS(3);
 }
+void DBUltraDeepPowerDown(void)
+{
+	DBReset(FLASH_DISABLE);
+	DBWriteProtect(FLASH_DISABLE);
+	FLASH_CS = SPI_ENABLE;
+	SPIWrite(DB_ULTRA_DEEP_POWER_DOWN);
+	FLASH_CS = SPI_DISABLE;
+	WAIT_MS(3);	
+}
+void DBExitUltraDeepPowerDown(void)
+{
+	FLASH_CS = SPI_ENABLE;
+	WAIT_MS(1);
+	FLASH_CS = SPI_DISABLE;
+	WAIT_MS(3);
+}
 
+void DBPageSizeConfig(uint8 type)
+{
+	DBReset(FLASH_DISABLE);
+	DBWriteProtect(FLASH_DISABLE);
+	FLASH_CS = SPI_ENABLE;
+	SPIWrite(DB_PAGE_SIZE1);
+	SPIWrite(DB_PAGE_SIZE2);
+	SPIWrite(DB_PAGE_SIZE3);
+	if (type == DB256)
+	{
+		SPIWrite(DB_PAGE_AS_256);
+	}else if (type == DB264)
+	{
+		SPIWrite(DB_PAGE_AS_264);
+	}
+	FLASH_CS = SPI_DISABLE;
+	WAIT_MS(3);	
+}
 /***********************
 	*
 	*  DB___________XXXXX function is dangerous. NOT recommanded.

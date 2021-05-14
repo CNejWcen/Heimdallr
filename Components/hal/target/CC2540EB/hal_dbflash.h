@@ -127,6 +127,15 @@ const uint8 db_normal[16] 	= {DBD_SECTOR_UNP, DBD_PROTECTED,DBD_PROTECTED,DBD_PR
 #define DB_ULTRA_DEEP_POWER_DOWN	0x79
 #define DB_EXIT_ULTRA_DEEP_POWER_DOWN	0x79
 
+#define DB256  0x01
+#define DB264  0x00
+
+#define DB_PAGE_SIZE1 0x3D
+#define DB_PAGE_SIZE2 0x2A
+#define DB_PAGE_SIZE3 0x80
+
+#define DB_PAGE_AS_256 0xA6
+#define DB_PAGE_AS_264 0xA7
 //Address es
 
 
@@ -134,12 +143,100 @@ void SPI_Init(void);
 void SPIWrite(uint8 write);
 void SPIRead(uint8 *read, uint8 write);
 
+// Flash Read
+void DBRead(uint32 addr,uint8 *buffer,uint8 len);
+void DBReadBuffer(uint8 which,uint32 addr,uint8 *buffer,uint8 len);
+void DBReadBuffer1(uint32 addr,uint8 *buffer,uint8 len);
+void DBReadBuffer2(uint32 addr,uint8 *buffer,uint8 len);
 
-void DbTest(void);
+// Write to Buffer
+void DBWriteBuffer(uint8 which,uint32 addr,uint8 *buffer,uint8 len);
+void DBWriteBuffer1(uint32 addr,uint8 *buffer,uint8 len);
+void DBWriteBuffer2(uint32 addr,uint8 *buffer,uint8 len);
+// Buffer to Memory
+void DBBufferPage2Mem(uint8 which,uint32 addr);
+void DBBuffer1PageToMem(uint32 addr);
+void DBBuffer2PageToMem(uint32 addr);
 
-void DbWriteProtect(bool val);
-void DbReset(bool val);
+// Write Through With Erase whole Page
+void DBWritePageThroughBuffer(uint8 which,uint32 addr,uint8 *buffer,uint8 len);
+void DBWritePageThroughBuffer1(uint32 addr,uint8 *buffer,uint8 len);
+void DBWritePageThroughBuffer2(uint32 addr,uint8 *buffer,uint8 len);
 
+// Write Through Without  Erase whole Page
+void DBWriteByteThroughBuffer(uint32 addr,uint8 *buffer,uint8 len);
+void DBWrite(uint32 addr,uint8 *data,uint8 len);		// abbr. of DBWriteByteThroughBuffer
+
+// Modify part of Page
+void DBModify(uint8 which,uint32 addr,uint8 *buffer,uint8 len); 
+
+// Erase Data
+void DBPageErase(uint32 addr);
+void DBBlockErase(uint32 addr);
+void DBSectorErase(uint32 addr);
+void DBChipErase(void);
+
+// Control
+void DBSupend(void);
+void DBResume(void);
+
+// Memory to Buffer
+void DBMemPage2Buffer(uint8 which,uint32 addr);
+void DBMemPage2Buffer1(uint32 addr);
+void DBMemPage2Buffer2(uint32 addr);
+
+/****
+*
+*To confirm successfully programmed after a Buffer to Main Memory Page Program command.
+*
+****/
+void DBCompareMemVsBuffer(uint8 which,uint32 addr);
+void DBCompareMemVsBuffer1(uint32 addr);
+void DBCompareMemVsBuffer2(uint32 addr);
+void DBConfirmWrite1(uint32 addr);
+void DBConfirmWrite2(uint32 addr);
+/****
+	* To preserve data integrity of a sector, each page within a sector must be updated/rewritten at least once within every 50,000 cumulative page
+	* erase/program operations within that sector. 
+	* The operation is internally self-timed and should take place in a maximum time of tEP.
+****/
+void DBAutoPageRewriteEx(uint8 which,uint32 addr);
+void DBAutoPageRewrite(uint32 addr);						// Static Data need to be Rewrite
+
+uint16 DBGetStatus(void);
+
+bool isBusy(void);				
+bool isSame(void);				// After use DBCompareMemVsBuffer or DBConfirmWrite1
+bool isProtectionDisabled(void);
+bool isError(void);				// Erase/Program Error
+
+// Power Management
+void DBDeepPowerDown(void);
+void DBExitDeepPowerDown(void);
+void DBUltraDeepPowerDown(void);
+void DBExitUltraDeepPowerDown(void);
+
+// Configure PageSize    ---- No USE
+void DBPageSizeConfig(uint8 type);
+
+// Basic Op
+void DBOpStart(uint8 opcode,uint32 addr);
+void DBOpEnd();
+void DBSendData(uint8 *buffer,uint8 len);
+
+void DBReset(bool val);
+void DBWriteProtect(bool val);
+void DBTest(void);
+
+/***********************
+	*
+	*  DB___________XXXXX function is dangerous. NOT recommanded.
+	*
+*********************/
+void DB___________SoftProtection(bool val);
+void DB___________EraseSectorProtecReg(void);
+void DB___________SetSectorReg(uint8 *settings);
+void DB___________FrezzeLockDown(void);
 
 #ifdef __cplusplus
 }
