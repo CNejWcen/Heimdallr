@@ -348,7 +348,7 @@ void HeimDallr_Init( uint8 task_id )
   WAIT_MS(100);
   MPU_TEST();
   
-  DbTest();
+  DBTest();
   /* 
    //SNV  only within 0x80 C 0xFE
   uint32 testData = 0x43434343;

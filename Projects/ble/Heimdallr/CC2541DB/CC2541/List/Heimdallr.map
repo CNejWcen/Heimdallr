@@ -2,7 +2,7 @@
 #                                                                              #
 #      IAR Universal Linker V5.7.0.39                                          #
 #                                                                              #
-#           Link time     =  04/Dec/2014  10:54:40                             #
+#           Link time     =  04/Dec/2014  23:15:37                             #
 #           Target CPU    =  x51                                               #
 #           List file     =  C:\Users\Liu\Desktop\Heimdallr\Projects\ble\Heimd #
 #                            allr\CC2541DB\CC2541\List\Heimdallr.map           #
@@ -15264,7 +15264,7 @@ BANK_RELAYS
   ======================
 SFR_AN
   Relative segment, address: DATA 00000090 - 00000090 (0x1 bytes), align: 0
-  Segment part 1. ROOT.       Intra module refs:   DbTest (hal_dbflash)
+  Segment part 1. ROOT.       Intra module refs:   DBTest (hal_dbflash)
                                                    HalDcDcControl (hal_sensor)
                                                    HeimDallr_Init (heimdallr)
                                                    SPI_Init (hal_dbflash)
@@ -15282,7 +15282,7 @@ SFR_AN
     -------------------------------------------------------------------------
 SFR_AN
   Relative segment, address: DATA 000000F4 - 000000F4 (0x1 bytes), align: 0
-  Segment part 2. ROOT.       Intra module refs:   DbTest (hal_dbflash)
+  Segment part 2. ROOT.       Intra module refs:   DBTest (hal_dbflash)
                                                    HeimDallr_Init (heimdallr)
                                                    SPI_Init (hal_dbflash)
                                                    TIMER3_OVF_ISR (heimdallr)
@@ -15294,7 +15294,7 @@ SFR_AN
     -------------------------------------------------------------------------
 SFR_AN
   Relative segment, address: DATA 000000FE - 000000FE (0x1 bytes), align: 0
-  Segment part 3. ROOT.       Intra module refs:   DbTest (hal_dbflash)
+  Segment part 3. ROOT.       Intra module refs:   DBTest (hal_dbflash)
                                                    HeimDallr_Init (heimdallr)
                                                    SPI_Init (hal_dbflash)
                                                    TIMER3_OVF_ISR (heimdallr)
@@ -17560,7 +17560,7 @@ SFR_AN
     -------------------------------------------------------------------------
 SFR_AN
   Relative segment, address: DATA 000000F8 - 000000F8 (0x1 bytes), align: 0
-  Segment part 5. ROOT.       Intra module refs:   DbTest
+  Segment part 5. ROOT.       Intra module refs:   DBTest
                                                    SPI_Init
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
@@ -17571,7 +17571,7 @@ SFR_AN
     -------------------------------------------------------------------------
 SFR_AN
   Relative segment, address: DATA 000000F9 - 000000F9 (0x1 bytes), align: 0
-  Segment part 6. ROOT.       Intra module refs:   DbTest
+  Segment part 6. ROOT.       Intra module refs:   DBTest
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
            U1DBUF                  000000F9 
@@ -17600,16 +17600,16 @@ SFR_AN
     -------------------------------------------------------------------------
 <BANKED_CODE> 3 (was BANKED_CODE)
   Relative segment, address: CODE 0001C67C - 0001C6F0 (0x75 bytes), align: 0
-  Segment part 21.            Intra module refs:   DbTest::?relay
+  Segment part 129.           Intra module refs:   DBTest::?relay
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           DbTest                  0001C67C 
+           DBTest                  0001C67C 
                calls direct
                XSTACK = 00000000 ( 00000014 )
     -------------------------------------------------------------------------
 <BANKED_CODE> 3 (was BANKED_CODE)
   Relative segment, address: CODE 0001C6F1 - 0001C72E (0x3e bytes), align: 0
-  Segment part 23.            Intra module refs:   SPI_Init::?relay
+  Segment part 131.           Intra module refs:   SPI_Init::?relay
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
            SPI_Init                0001C6F1 
@@ -17617,25 +17617,25 @@ SFR_AN
     -------------------------------------------------------------------------
 BANK_RELAYS
   Relative segment, address: CODE 000010EC - 000010F1 (0x6 bytes), align: 0
-  Segment part 22.
+  Segment part 130.
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           DbTest::?relay          000010EC        HeimDallr_Init (heimdallr)
+           DBTest::?relay          000010EC        HeimDallr_Init (heimdallr)
     -------------------------------------------------------------------------
 BANK_RELAYS
   Relative segment, address: CODE 000010F2 - 000010F7 (0x6 bytes), align: 0
-  Segment part 24.            Intra module refs:   DbTest
+  Segment part 132.           Intra module refs:   DBTest
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
            SPI_Init::?relay        000010F2 
     -------------------------------------------------------------------------
 <XDATA_ROM_C> 1 (was XDATA_ROM_C)
   Relative segment, address: CONST 0000806C - 00008086 (0x1b bytes), align: 0
-  Segment part 16.            Intra module refs:   DbTest
+  Segment part 16.            Intra module refs:   DBTest
     -------------------------------------------------------------------------
 <BANKED_CODE,XDATA_ROM_C_FLASH> 1 (was XDATA_ROM_C_FLASH)
   Relative segment, address: CODE 0000806C - 00008086 (0x1b bytes), align: 0
-  Segment part 29.            Intra module refs:   Segment part 16
+  Segment part 137.           Intra module refs:   Segment part 16
 
     *************************************************************************
 
@@ -17893,7 +17893,7 @@ BANK_RELAYS
   Segment part 13.
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           dbg::?relay             0000110A        DbTest (hal_dbflash)
+           dbg::?relay             0000110A        DBTest (hal_dbflash)
                                                    HeimDallr_Init (heimdallr)
                                                    HeimDallr_ProcessEvent (heimdallr)
                                                    MPU_TEST (hal_mpu)
@@ -20745,7 +20745,7 @@ VREG
                                                    ATT_ReadRsp (att_server)
                                                    ATT_WriteRsp (att_server)
                                                    Batt_AddService (battprofile)
-                                                   DbTest (hal_dbflash)
+                                                   DBTest (hal_dbflash)
                                                    DevInfo_AddService (devinfoservice)
                                                    DevInfo_SetParameter (devinfoservice)
                                                    GAPBondMgr_LinkEst (gapbondmgr)
@@ -21171,7 +21171,7 @@ VREG
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
            ?V1                     00000009        Batt_AddService (battprofile)
-                                                   DbTest (hal_dbflash)
+                                                   DBTest (hal_dbflash)
                                                    DevInfo_AddService (devinfoservice)
                                                    DevInfo_SetParameter (devinfoservice)
                                                    GAPBondMgr_LinkEst (gapbondmgr)
@@ -21250,7 +21250,7 @@ VREG
   Segment part 3.             Intra module refs:   ?V3
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           ?V2                     0000000A        DbTest (hal_dbflash)
+           ?V2                     0000000A        DBTest (hal_dbflash)
                                                    DevInfo_SetParameter (devinfoservice)
                                                    GAPBondMgr_LinkEst (gapbondmgr)
                                                    GAPBondMgr_ProcessEvent (gapbondmgr)
@@ -21312,7 +21312,7 @@ VREG
   Segment part 4.             Intra module refs:   ?V4
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           ?V3                     0000000B        DbTest (hal_dbflash)
+           ?V3                     0000000B        DBTest (hal_dbflash)
                                                    GAPBondMgr_LinkEst (gapbondmgr)
                                                    GAPBondMgr_ProcessEvent (gapbondmgr)
                                                    GAPBondMgr_ProcessGAPMsg (gapbondmgr)
@@ -21366,7 +21366,7 @@ VREG
   Segment part 5.             Intra module refs:   ?V5
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           ?V4                     0000000C        DbTest (hal_dbflash)
+           ?V4                     0000000C        DBTest (hal_dbflash)
                                                    GAPBondMgr_LinkEst (gapbondmgr)
                                                    GAPBondMgr_ProcessGAPMsg (gapbondmgr)
                                                    GAPBondMgr_ResolveAddr (gapbondmgr)
@@ -21406,7 +21406,7 @@ VREG
   Segment part 6.             Intra module refs:   ?V6
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           ?V5                     0000000D        DbTest (hal_dbflash)
+           ?V5                     0000000D        DBTest (hal_dbflash)
                                                    GAPBondMgr_LinkEst (gapbondmgr)
                                                    GAPBondMgr_ProcessGAPMsg (gapbondmgr)
                                                    GAPBondMgr_ResolveAddr (gapbondmgr)
@@ -21851,7 +21851,7 @@ CSTART
                                                    ATT_WriteRsp::?relay (att_server)
                                                    Batt_AddService::?relay (battprofile)
                                                    Batt_MeasLevel::?relay (battprofile)
-                                                   DbTest::?relay (hal_dbflash)
+                                                   DBTest::?relay (hal_dbflash)
                                                    DevInfo_AddService::?relay (devinfoservice)
                                                    DevInfo_SetParameter::?relay (devinfoservice)
                                                    GAPBondMgr_Init::?relay (gapbondmgr)
@@ -23438,7 +23438,7 @@ RCODE
                                                    ATT_ReadByGrpTypeRsp (att_server)
                                                    ATT_ReadByTypeRsp (att_server)
                                                    Batt_AddService (battprofile)
-                                                   DbTest (hal_dbflash)
+                                                   DBTest (hal_dbflash)
                                                    DevInfo_AddService (devinfoservice)
                                                    DevInfo_SetParameter (devinfoservice)
                                                    GAPBondMgr_LinkEst (gapbondmgr)
@@ -24038,7 +24038,7 @@ RCODE
                                                    ATT_ReadRsp (att_server)
                                                    ATT_WriteRsp (att_server)
                                                    Batt_AddService (battprofile)
-                                                   DbTest (hal_dbflash)
+                                                   DBTest (hal_dbflash)
                                                    DevInfo_AddService (devinfoservice)
                                                    DevInfo_SetParameter (devinfoservice)
                                                    GAPBondMgr_Init (gapbondmgr)
@@ -24489,7 +24489,7 @@ RCODE
                                                    ?Subroutine5 (gapbondmgr)
                                                    ?Subroutine6 (gapbondmgr)
                                                    ATT_BuildFindByTypeValueRsp (att_util)
-                                                   DbTest (hal_dbflash)
+                                                   DBTest (hal_dbflash)
                                                    DevInfo_SetParameter (devinfoservice)
                                                    GAPRole_Init (peripheral)
                                                    GAPRole_StartDevice (peripheral)
@@ -24766,7 +24766,7 @@ RCODE
                                                    ATT_ReadRsp (att_server)
                                                    ATT_WriteRsp (att_server)
                                                    Batt_AddService (battprofile)
-                                                   DbTest (hal_dbflash)
+                                                   DBTest (hal_dbflash)
                                                    DevInfo_AddService (devinfoservice)
                                                    DevInfo_SetParameter (devinfoservice)
                                                    GAPBondMgr_LinkEst (gapbondmgr)

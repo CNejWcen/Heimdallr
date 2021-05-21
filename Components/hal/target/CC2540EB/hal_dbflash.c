@@ -16,7 +16,7 @@ void DBRead(uint32 addr,uint8 *buffer,uint8 len)
 	DBOpStart(DB_ARRAY_READ_LP,addr);
 	for (int i = 0; i < len; ++i)
 	{
-		SPIRead(buffer[i],DUMMY);
+		SPIRead(&buffer[i],DUMMY);
 	}
 	DBOpEnd();
 }
@@ -27,7 +27,7 @@ void DBReadBuffer(uint8 which,uint32 addr,uint8 *buffer,uint8 len)
 	DBOpStart(which,addr);
 	for (uint8 i = 0; i < len; ++i)
 	{
-		SPIRead(buffer[i],DUMMY);
+		SPIRead(&buffer[i],DUMMY);
 	}
 	DBOpEnd();
 }
@@ -375,11 +375,6 @@ void DB___________FrezzeLockDown(void)
 	SPIWrite(0xAA);
 	SPIWrite(0x40); 
 	FLASH_CS = SPI_DISABLE;
-}
-
-bool isBusy()
-{
-	return false;
 }
 
 void DBOpStart(uint8 opcode,uint32 addr)
