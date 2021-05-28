@@ -9,12 +9,10 @@
 
 #include "hal_dbflash.h"
 
-
-
 void DBRead(uint32 addr,uint8 *buffer,uint8 len)
 {
 	DBOpStart(DB_ARRAY_READ_LP,addr);
-	for (int i = 0; i < len; ++i)
+	for (uint8 i = len -1 ; i >= 0 ; --i)
 	{
 		SPIRead(&buffer[i],DUMMY);
 	}
@@ -25,7 +23,7 @@ void DBRead(uint32 addr,uint8 *buffer,uint8 len)
 void DBReadBuffer(uint8 which,uint32 addr,uint8 *buffer,uint8 len)
 {
 	DBOpStart(which,addr);
-	for (uint8 i = 0; i < len; ++i)
+	for (uint8 i = len -1 ; i >= 0 ; --i)
 	{
 		SPIRead(&buffer[i],DUMMY);
 	}
@@ -311,6 +309,31 @@ void DBPageSizeConfig(uint8 type)
 	FLASH_CS = SPI_DISABLE;
 	WAIT_MS(3);	
 }
+
+void DBSoftReset(void)
+{
+	DBReset(FLASH_DISABLE);
+	DBWriteProtect(FLASH_DISABLE);
+	FLASH_CS = SPI_ENABLE;
+	SPIWrite(DB_SOFT_RESET);
+	SPIWrite(DB_SOFT_RESETx);
+	SPIWrite(DB_SOFT_RESETx);
+	SPIWrite(DB_SOFT_RESETx);
+	FLASH_CS = SPI_DISABLE;
+	WAIT_MS(1);
+}
+
+
+
+uint32 makeByteAddr(uint32 sector,uint8 page,uint16 inner)
+{
+	return sector + page * PAGE_SIZE + inner;
+}
+uint32 makePageAddr(uint32 sector,uint8 page)
+{
+	return sector + page * PAGE_SIZE;
+}
+
 /***********************
 	*
 	*  DB___________XXXXX function is dangerous. NOT recommanded.
@@ -393,7 +416,7 @@ void DBOpEnd()
 }
 void DBSendData(uint8 *buffer,uint8 len)
 {
-	for (uint8 i = 0; i < len; ++i)
+	for (uint8 i = len -1 ; i >= 0; --i)
 	{
 		SPIWrite(buffer[i]);
 	}

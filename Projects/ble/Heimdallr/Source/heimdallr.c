@@ -44,7 +44,7 @@
 #include "hal_sht.h"
 #include "hal_mpu.h"
 #include "hal_dbflash.h"
- 
+#include "bsp_storage.h"
 
 
 /*********************************************************************
@@ -220,6 +220,13 @@ static void resetCharacteristicValue(uint16 servUuid, uint8 paramID, uint8 value
  * PROFILE CALLBACKS
  */
 
+volatile DataPage _dataPg;
+volatile UserPage _userPg;
+volatile SecuPage _secuPg;
+volatile TimePage _timePg;
+volatile SettingsPage _settingsPg;
+volatile HardWareInfo _hardPg;
+volatile uint32 __currentTimeUnix;
 // GAP Role Callbacks
 static gapRolesCBs_t heimDallr_PeripheralCBs =
 {
@@ -347,7 +354,12 @@ void HeimDallr_Init( uint8 task_id )
   dbg("Humi Data:%02x %02x %02x\n",buf[0],buf[1],buf[2]);
   WAIT_MS(100);
   MPU_TEST();
+
+  MPU_Init();
+  uint16 buff[3];
+  getACCEL(buff);
   
+  dbg("Accel data : %x\t%x\t%x\n",buff[0],buff[1],buff[2]);
   DBTest();
   /* 
    //SNV  only within 0x80 C 0xFE

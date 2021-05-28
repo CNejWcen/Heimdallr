@@ -245,10 +245,14 @@
       <file>$TOOLKIT_DIR$\inc\ioCC2541.h</file>
       <file>$PROJ_DIR$\CC2541\Obj\OSAL_HeimDallr.r51</file>
       <file>$PROJ_DIR$\CC2541\Obj\hal_lis3dh.pbi</file>
+      <file>$PROJ_DIR$\CC2541\Obj\bsp_storage.r51</file>
+      <file>$PROJ_DIR$\CC2541\Obj\bsp_storage.pbi</file>
       <file>$PROJ_DIR$\..\..\..\..\Components\hal\target\CC2540EB\hal_dbflash.h</file>
       <file>$PROJ_DIR$\..\..\..\..\Components\hal\target\CC2540EB\hal_dbflash.c</file>
       <file>$PROJ_DIR$\CC2541\Obj\hal_dbflash.r51</file>
       <file>$PROJ_DIR$\CC2541\Obj\hal_dbflash.pbi</file>
+      <file>$PROJ_DIR$\..\Source\bsp_storage.c</file>
+      <file>$PROJ_DIR$\..\Source\bsp_storage.h</file>
     </outputs>
     <file>
       <name>$PROJ_DIR$\..\Source\heimdallr.c</name>
@@ -265,11 +269,11 @@
       <inputs>
         <tool>
           <name>ICC8051</name>
-          <file> 204 206 19 18 110 23 132 218 139 158 225 38 84 44 152 28 202 121 236 154 85 61 235 228 87 147 174 168 116 213 166 32 46 192 189 181 214 81 69 149 146 159 3 153 120 119 150 134 239</file>
+          <file> 204 206 19 18 110 23 132 218 139 158 225 38 84 44 152 28 202 121 236 154 85 61 235 228 87 147 174 168 116 213 166 32 46 192 189 181 214 81 69 149 146 159 3 153 120 119 150 134 241 246</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 19 18 110 23 132 218 139 158 225 38 84 44 152 28 202 121 236 154 85 61 235 228 87 147 174 168 116 213 166 32 46 192 189 181 214 81 69 149 146 159 3 153 120 119 150 134 239</file>
+          <file> 19 18 110 23 132 218 139 158 225 38 84 44 152 28 202 121 236 154 85 61 235 228 87 147 174 168 116 213 166 32 46 192 189 181 214 81 69 149 146 159 3 153 120 119 150 134 241 246</file>
         </tool>
       </inputs>
     </file>
@@ -454,7 +458,7 @@
       <inputs>
         <tool>
           <name>XLINK</name>
-          <file> 53 126 129 51 220 95 237 229 21 54 112 40 97 233 42 26 232 217 33 65 241 200 49 48 76 17 99 101 30 75 109 82 60 211 20 58 31 22 89 66 47 234 221 103 79 83</file>
+          <file> 53 126 129 51 220 95 237 229 21 54 112 40 97 233 42 26 232 217 33 65 243 200 49 48 76 17 99 101 30 75 109 82 60 211 20 58 31 22 89 66 47 234 221 103 79 83</file>
         </tool>
       </inputs>
     </file>
@@ -791,11 +795,11 @@
       <inputs>
         <tool>
           <name>ICC8051</name>
-          <file> 204 206 159 121 158 139 236 152 19 18 110 138 134 218 120 119 150 146 239</file>
+          <file> 204 206 159 121 158 139 236 152 19 18 110 138 134 218 120 119 150 146 241</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 159 121 158 139 236 152 19 18 110 138 134 218 120 119 150 146 239</file>
+          <file> 159 121 158 139 236 152 19 18 110 138 134 218 120 119 150 146 241</file>
         </tool>
       </inputs>
     </file>
@@ -1379,21 +1383,40 @@
       <outputs>
         <tool>
           <name>ICC8051</name>
-          <file> 241</file>
+          <file> 243</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 242</file>
+          <file> 244</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>ICC8051</name>
-          <file> 204 206 239 139 150 146 159 121 158 236 218 152 19 18 110</file>
+          <file> 204 206 241 139 150 146 159 121 158 236 218 152 19 18 110</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 239 139 150 146 159 121 158 236 218 152 19 18 110</file>
+          <file> 241 139 150 146 159 121 158 236 218 152 19 18 110</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\Source\bsp_storage.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 240</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICC8051</name>
+          <file> 204 206 246 139 150 146 159 121 158 236 218 152 19 18 110 241</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 246 139 150 146 159 121 158 236 218 152 19 18 110 241</file>
         </tool>
       </inputs>
     </file>
