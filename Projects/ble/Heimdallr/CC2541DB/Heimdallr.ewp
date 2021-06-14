@@ -1088,6 +1088,12 @@
   <group>
     <name>APP</name>
     <file>
+      <name>$PROJ_DIR$\..\Source\bsp_storage.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\Source\bsp_storage.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\Source\heimdallr.c</name>
     </file>
     <file>

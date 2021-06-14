@@ -14,11 +14,15 @@ extern "C"
 {
 #endif
 
+#include <stdio.h>
+#include <stdlib.h>
+	
 #include "hal_types.h"
 #include "hal_timer.h"
 #include "comdef.h"
 #include "hal_drivers.h"
 #include "hal_dbflash.h"
+
 
 
 #define UDHeadLen 0x05
@@ -67,7 +71,7 @@ typedef struct __secu_info
 
 typedef struct __time_info
 {
-	uint8 time[4];
+	uint32 time;
 }TimePage;
 
 typedef struct __setttings
@@ -96,6 +100,7 @@ typedef struct flashdata
 	uint8 data[];
 }UnitData;
 
+
 uint8 UD_init(UnitData *unit,uint8 type,uint8 *data);
 uint8 UD_setLength(uint8 type,uint8 len);
 uint8 UD_setType(uint8 type,uint8 sensor);
@@ -106,7 +111,8 @@ uint8 getUDLen(uint8 type);
 uint8 getUDLenCode(uint8 len);
 uint32 bsp_write32b(uint32 addr,uint32 data);
 uint32 bsp_write8b(uint32 addr, uint8 data);
-uint32 bsp_write(uint32 addr,uint8 *buffer,uint8 len);
+uint32 bsp_write(uint32 addr,volatile uint8 *buffer,uint8 len);
+//uint32 bsp_write(uint32 addr,uint8 *buffer,uint8 len);
 uint32 bsp_read32b(uint32 addr,uint32 *data);
 uint32 bsp_read8b(uint32 addr,uint8 *data);
 uint32 bsp_read(uint32 addr,uint8 *buffer,uint8 len);

@@ -17,14 +17,13 @@ extern volatile SettingsPage _settingsPg;
 extern volatile HardWareInfo _hardPg;
 extern volatile uint32 __currentTimeUnix;
 
-
 uint8 UD_init(UnitData *unit,uint8 type,uint8 *data)
 {
 	uint8 datalen = getUDLen(type);
 	unit = (UnitData *)malloc(sizeof(UnitData) + sizeof(uint8) * datalen );
-	unit->type = type;
+	unit->meta = type;
 	unit->time = __currentTimeUnix;
-	for (uint8 i = datalen - 1; i >= 0; --i)
+	for (int8 i = datalen - 1; i >= 0; --i)
 	{
 		unit->data[i] = data[i];
 	}
@@ -38,13 +37,12 @@ uint8 UD_setType(uint8 type,uint8 sensor)
 {
 	return type | sensor;
 }
-
 uint32 UD_write(UnitData *unit,uint32 addr)
 {
-	uint8 datalen = getUDLen(unit->type);
-	addr = bsp_write8b(addr,unit->type);
+	uint8 datalen = getUDLen(unit->meta);
+	addr = bsp_write8b(addr,unit->meta);
 	addr = bsp_write32b(addr,unit->time);
-	for (uint8 i = datalen -1; i >= 0 ; --i)
+	for (int8 i = datalen -1; i >= 0 ; --i)
 	{
 		addr = bsp_write8b(addr,unit->data[i]);
 	}
@@ -57,23 +55,23 @@ uint32 UD_read(UnitData *unit,uint32 addr)
 	addr = bsp_read8b(addr,&type);
 	uint8 datalen = getUDLen(type);
 	unit = (UnitData *)malloc(sizeof(UnitData) + sizeof(uint8) * datalen );
-	unit->type = type;
+	unit->meta = type;
 	addr = bsp_read32b(addr,&unit->time);
 	addr = bsp_read(addr,unit->data,datalen);
 	return addr;
 }
 uint8 *UD_toString(UnitData unit)
 {
-	uint8 unitlen = UDHeadLen + getUDLen(unit.type);
+	uint8 unitlen = UDHeadLen + getUDLen(unit.meta);
 	static uint8 *string;
 	string = malloc(unitlen * sizeof(uint8));
-	string[0] = unit.type;
+	string[0] = unit.meta;
 	string[1] = (unit.time & 0xff000000) >> 24;
 	string[2] = (unit.time & 0x00ff0000) >> 16;
 	string[3] = (unit.time & 0x0000ff00) >> 8;
 	string[4] = (unit.time & 0x000000ff);
 	uint8 datalen = unitlen - UDHeadLen;
-	for (uint8 i = datalen - 1; i >=0 ; --i)
+	for (int8 i = datalen - 1; i >=0 ; --i)
 	{	//5 + (datalen -1 -i)
 		string[4 + datalen - i] = unit.data[i];	
 	}
@@ -132,19 +130,19 @@ uint32 bsp_write32b(uint32 addr,uint32 data)
 }
 uint32 bsp_write8b(uint32 addr, uint8 data)
 {
-	DBWrite(addr,data,1);
+	DBWrite(addr,&data,1);
 	return addr + 1;
 }
-uint32 bsp_write(uint32 addr,uint8 *buffer,uint8 len)
+uint32 bsp_write(uint32 addr,volatile uint8 *buffer,uint8 len)
 {
-	DBWrite(addr,buffer,len);
+	DBWrite(addr,(uint8 *)buffer,len);
 	return addr + len;
 }
 uint32 bsp_read32b(uint32 addr,uint32 *data)
 {
 	uint8 buffer[4];
 	DBRead(addr,buffer,4);
-	*data = ((buffer[3] << 24) | (buffer[2] << 16) | (buffer[1] << 8) | buffer[0]);
+	*data = (((uint32)(buffer[3]) << 24) | ((uint32)buffer[2] << 16) | (buffer[1] << 8) | buffer[0]);
 	return addr + 4;
 }
 uint32 bsp_read8b(uint32 addr,uint8 *data)
@@ -201,8 +199,8 @@ void bsp_userPg2Mem(void)
 void bsp_secuPg2Mem(void)
 {
 	uint32 addr = SECU_DATA;
-	addr = bsp_write(addr,_userPg.username,64);
-	addr = bsp_write(addr,_userPg.password,128);
+	addr = bsp_write(addr,_secuPg.username,64);
+	addr = bsp_write(addr,_secuPg.password,128);
 }
 void bsp_timePg2Mem(void)
 {
@@ -215,8 +213,10 @@ void bsp_timePg2Mem(void)
 void bsp_setPg2Mem(void)
 {
 	uint32 addr = SETTINGS;
-	addr = bsp_write(addr,_userPg.username,64);
-	addr = bsp_write(addr,_userPg.password,128);
+	addr = bsp_write(addr,_settingsPg.setting,32);
+	addr = bsp_write32b(addr,_settingsPg.intervalTime);
+	addr = bsp_write(addr,_settingsPg.type,32);
+	addr = bsp_write(addr,_settingsPg.position,32);
 }
 	// uint32 manufacture;
 	// uint32 version;
